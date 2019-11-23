@@ -4,7 +4,7 @@ module.exports =
 {
     user({ id })
     {
-        return User.findByPk(id)
+        return  User.findByPk(id)
     },
 
     users()
