@@ -5,7 +5,7 @@ module.exports =
     up: (queryInterface, Sequelize) =>
     {
        
-        return queryInterface.createTable('users',
+        return queryInterface.createTable('dreams_categories',
         { 
             id:
             {
@@ -14,28 +14,23 @@ module.exports =
                 autoIncrement: true,
                 allowNull: false
             },
-                
-            name: 
+            
+            dream_id:
             {
-                type: Sequelize.STRING,
-                allowNull: false
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: { model: 'dreams', key: 'id' },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE'
             },
 
-            email: 
+            category_id:
             {
-                type: Sequelize.STRING,
-                allowNull: false
-            },
-
-            password: 
-            {
-                type: Sequelize.STRING,
-                allowNull: false
-            },
-
-            category:
-            {   
-                type: Sequelize.STRING,
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: { model: 'categories', key: 'id' },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE'
             },
             
             created_at:
@@ -43,8 +38,6 @@ module.exports =
 				type: Sequelize.DATE,
 				allowNull: false,
             },
-
-            
 
 			updated_at:
 			{
@@ -58,7 +51,7 @@ module.exports =
     down: (queryInterface, Sequelize) =>
     {
         
-        return queryInterface.dropTable('users')
+        return queryInterface.dropTable('dreams_categories')
         
     }
 }

@@ -5,7 +5,7 @@ module.exports =
     up: (queryInterface, Sequelize) =>
     {
        
-        return queryInterface.createTable('dreams',
+        return queryInterface.createTable('categories',
         { 
             id:
             {
@@ -14,34 +14,26 @@ module.exports =
                 autoIncrement: true,
                 allowNull: false
             },
-			
-			title: 
+                
+            name: 
             {
                 type: Sequelize.STRING,
                 allowNull: false
             },
 
-            public: 
+            dreams_amount:
             {
-                type: Sequelize.BOOLEAN,
-                allowNull: false
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                defaultValue: 0
             },
-
-			user_id:
-			{
-				type: Sequelize.INTEGER,
-				allowNull: false,
-				references: { model : 'users', key: 'id' },
-				onUpdate: 'CASCADE',
-				onDelete: 'CASCADE'
-			},
 
             created_at:
 			{
 				type: Sequelize.DATE,
 				allowNull: false,
             },
-            
+           
 			updated_at:
 			{
 				type: Sequelize.DATE,
@@ -54,7 +46,7 @@ module.exports =
     down: (queryInterface, Sequelize) =>
     {
         
-        return queryInterface.dropTable('dreams')
+        return queryInterface.dropTable('categories')
         
     }
 }

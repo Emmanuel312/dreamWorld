@@ -7,7 +7,8 @@ class Dream extends Model
     {
         super.init(
         {
-            title: DataTypes.STRING
+            title: DataTypes.STRING,
+            public: DataTypes.BOOLEAN,
         },{  sequelize })
     }
 
@@ -15,6 +16,7 @@ class Dream extends Model
     static associate(models)
     {
         this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' })
+        this.belongsToMany(models.Category, { foreignKey: 'dream_id', as: 'categories', through: 'dreams_categories' })
     }
 
 }
