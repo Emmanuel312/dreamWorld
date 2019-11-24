@@ -10,15 +10,24 @@ const schemaType =
         password: String!
         category: String
     }
+
+    type UserDreams
+    {
+        user: User!,
+        dreams: [Dream]
+    }
+
+   
+
 `
-// Declaracao dos resolvers de consulta
+
 const query = 
 `
     user(id: ID!) : User
-    users: [User]
+    users: [User],
+    userDreams(id: ID!) : UserDreams
 `
 
-// Declaracao dos resolvers de manipulacao
 const mutation = 
 `
     createUser(name: String!, email: String!, password: String!, category: String) : User

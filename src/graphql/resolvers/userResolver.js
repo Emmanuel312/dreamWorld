@@ -2,9 +2,12 @@ const User = require('../../models/User')
 
 module.exports = 
 {
-    user({ id })
+    async user({ id })
     {
-        return  User.findByPk(id)
+        const user = await User.findByPk(id)
+        if(!user) return user
+
+        return user
     },
 
     users()
@@ -26,5 +29,22 @@ module.exports =
 
         return User.create(user)
 
+    },
+    async userDreams({ id })
+    {
+        const userDreams = (await User.findByPk(id, { include: { association: 'dreams' } })).get({ plain: true })
+
+        
+
+        const user =
+        {
+            id: userDreams.id,
+            name: userDreams.name,
+            email: userDreams.email,
+            password: userDreams.password,
+            category: userDreams.password,
+        }
+
+        return { user, dreams: userDreams.dreams  }
     }
 }

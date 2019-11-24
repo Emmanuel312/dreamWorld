@@ -5,6 +5,10 @@ const expressGraphql = require('express-graphql')
 const resolvers = require('./graphql/resolvers')
 const schemas = require('./graphql/schemas')
 
-app.use('/graphql', expressGraphql({ schema: schemas, rootValue: resolvers, graphiql: true }))
+app.use('/graphql', expressGraphql(
+{   
+    schema: schemas, 
+    rootValue: resolvers, graphiql: true,   
+}))
 
-app.listen(3000)
+app.listen(3000, () => 'Graphql server running on port 3000 :D')

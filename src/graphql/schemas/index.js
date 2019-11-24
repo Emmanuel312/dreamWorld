@@ -9,12 +9,14 @@ const mutations = schemasArray.map(schema => schema.mutation)
 
 const Types = types.join(' ')
 
+// Declaracao dos resolvers de consulta
 const Queries = `
     type Query
     {
         ${queries.join(' ')}
     }
 `
+// Declaracao dos resolvers de manipulacao
 const Mutations = `
     type Mutation
     {
