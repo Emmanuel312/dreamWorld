@@ -20,7 +20,12 @@ module.exports =
                 type: Sequelize.STRING,
                 allowNull: false
             },
-
+            body:
+            {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
+            
             public: 
             {
                 type: Sequelize.BOOLEAN,

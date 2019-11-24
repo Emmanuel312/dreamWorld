@@ -17,7 +17,12 @@ const schemaType =
         dreams: [Dream]
     }
 
-   
+    type UserAndToken
+    {
+        user: User!
+        token: String!
+    }
+    
 
 `
 
@@ -30,7 +35,8 @@ const query =
 
 const mutation = 
 `
-    createUser(name: String!, email: String!, password: String!, category: String) : User
+    register(name: String!, email: String!, password: String!, category: String) : UserAndToken
+    login(email: String!, password: String!): UserAndToken
 `
 
 module.exports = { schemaType, query, mutation } 

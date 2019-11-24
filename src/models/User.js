@@ -1,5 +1,7 @@
 const { DataTypes,Model } = require('sequelize')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const { secret } = require('../config/auth')
 
 class User extends Model
 {
@@ -32,6 +34,17 @@ class User extends Model
 const hashPassword = async (user) =>
 {
     user.password = await bcrypt.hash(user.password,10)
+}
+
+// Custom Methods
+User.prototype.comparePassword = function(password)
+{
+    return bcrypt.compare(password,this.password)
+}
+
+User.prototype.generateToken = function()
+{
+    return jwt.sign({ id: this.id }, secret, { expiresIn: '1d' })
 }
 
 module.exports = User

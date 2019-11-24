@@ -18,4 +18,4 @@ app.use('/graphql', expressGraphql(
     })
 }))
 
-app.listen(3000, () => 'Graphql server running on port 3000 :D')
+app.listen(3000)
