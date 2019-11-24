@@ -1,33 +1,51 @@
 const User = require('../../models/User')
+const CustomError = require('../errorHandler')
 
 module.exports = 
 {
     async user({ id })
     {
-        const user = await User.findByPk(id)
-        if(!user) return user
+        try
+        {
+            const user = await User.findByPk(id)
+            if(!user) throw new CustomError('User not Found!!!')
 
-        return user
+            return user
+        }
+        catch(err)
+        {
+            throw new CustomError(err)
+        }
+        
     },
 
     users()
     {
+
         return User.findAll()
     },
 
-    createUser(params)
+    async createUser({ name, email, password, category = null })
     {
-        const { name, email, password } = params
-        
-        const user = 
+        try
         {
-            name,
-            email,
-            password,
-            category: !!params.category? params.category : null
-        }
+                    
+            if(!!(await User.findOne({ where: { email:email } }))) throw new CustomError('User already exists!!!')
 
-        return User.create(user)
+            const user = 
+            {
+                name,
+                email,
+                password,
+                category
+            }
+
+            return User.create(user)
+        }
+        catch(err)
+        {
+            throw new CustomError(err)
+        }
 
     },
     async userDreams({ id })

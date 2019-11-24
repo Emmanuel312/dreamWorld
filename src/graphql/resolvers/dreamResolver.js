@@ -1,20 +1,48 @@
 const Dream = require('../../models/Dream')
+const CustomError = require('../errorHandler')
 
 module.exports = 
 {
-    dream({ id })
+    async dream({ id })
     {
-        return Dream.findByPk(id)
+        try
+        {
+            const dream = await Dream.findByPk(id)
+            if(!dream) throw new CustomError('Dream not Found!!!')
+
+            return dream
+        }
+        catch(err)
+        {
+            throw new CustomError(err)
+        }
     },
 
-    dreams()
+    async dreams({ page = 1 , limit = 10 })
     {
-        return Dream.findAll()
+        try
+        {
+        
+            const options = 
+            {
+                order: [['created_at','ASC']],
+                page,
+                paginate: limit
+            }
+            const dreams = await Dream.paginate(options)
+            console.log(dreams)
+            return dreams
+        }
+
+        catch(err)
+        {
+            throw new CustomError(err)
+        }
     },
 
     createDream({ title, body, public, user_id })
     {
-        console.log(body)
+        
         const dream = 
         {
             title,

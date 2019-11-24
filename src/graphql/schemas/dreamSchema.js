@@ -9,12 +9,19 @@ const schemaType =
         public: Boolean!
         user_id: ID!
     }
+
+    type DreamsPaginate
+    {
+        docs: [Dream]
+        pages: Int
+        total: Int
+    }
 `
 
 const query = 
 `
     dream(id: ID!) : Dream
-    dreams: [Dream!]!
+    dreams(page: Int,limit: Int): DreamsPaginate
 `
 
 const mutation = 

@@ -1,5 +1,5 @@
 const { DataTypes,Model } = require('sequelize')
-
+const sequelizePaginate = require('sequelize-paginate')
 
 class Dream extends Model
 {
@@ -22,5 +22,6 @@ class Dream extends Model
 
 }
 
+sequelizePaginate.paginate(Dream)
 
 module.exports = Dream

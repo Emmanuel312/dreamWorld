@@ -8,7 +8,14 @@ const schemas = require('./graphql/schemas')
 app.use('/graphql', expressGraphql(
 {   
     schema: schemas, 
-    rootValue: resolvers, graphiql: true,   
+    rootValue: resolvers,
+    graphiql: true,   
+    customFormatErrorFn: error =>
+    ({
+        messsage: error.message,
+        path: error.path,
+        locations: error.locations,
+    })
 }))
 
 app.listen(3000, () => 'Graphql server running on port 3000 :D')
