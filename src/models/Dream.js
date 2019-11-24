@@ -8,6 +8,7 @@ class Dream extends Model
         super.init(
         {
             title: DataTypes.STRING,
+            body: DataTypes.STRING,
             public: DataTypes.BOOLEAN,
         },{  sequelize })
     }

@@ -5,6 +5,7 @@ const schemaType =
     {
         id: ID
         title: String!
+        body: String
         public: Boolean!
         user_id: ID!
     }
@@ -13,13 +14,13 @@ const schemaType =
 const query = 
 `
     dream(id: ID!) : Dream
-    dreams: [Dream]
+    dreams: [Dream!]!
 `
 
 // Declaracao dos resolvers de manipulacao
 const mutation = 
 `
-    createDream(title: String!, public: Boolean!, user_id: ID) : Dream
+    createDream(title: String!, body: String!, public: Boolean!, user_id: ID) : Dream
 `
 
 module.exports = { schemaType, query, mutation} 

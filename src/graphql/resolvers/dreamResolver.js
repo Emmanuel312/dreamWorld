@@ -12,11 +12,13 @@ module.exports =
         return Dream.findAll()
     },
 
-    createDream({ title, public, user_id })
+    createDream({ title, body, public, user_id })
     {
+        console.log(body)
         const dream = 
         {
             title,
+            body,
             public,
             user_id
         }
